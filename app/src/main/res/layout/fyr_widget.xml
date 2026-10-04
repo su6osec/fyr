@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  The home-screen widget: a header and up to five of today's habits, each one
+  a whole row you can press. Fire icon uses app icon for brand consistency.
+
+  Written out as five explicit rows rather than one row layout included five
+  times, because RemoteViews resolves a view by id and five includes would
+  put five views under each id — every row would then show the first habit's
+  name. Ids w1..w5 are per-row on purpose; the provider hides whatever the
+  day does not need.
+
+  The sample text on each row is not decoration. It is what the launcher
+  renders in the widget picker and before the first update lands, so a
+  preview shows a full list rather than five empty lines.
+
+  Which is also why HardcodedText is ignored here. These lines are a picture
+  drawn once for a preview, not copy anybody reads or translates — the text a
+  user ever actually sees comes out of the store, one habit name at a time,
+  and has never been in this file.
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="HardcodedText,NestedWeights"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/fyr_widget_bg"
+    android:orientation="vertical"
+    android:padding="12dp">
+
+    <!-- Header with title, count, and app logo -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingBottom="8dp">
+
+        <TextView
+            android:id="@+id/widget_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="Fyr"
+            android:textColor="@color/widget_ink"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/widget_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:text="2 habits"
+            android:textColor="@color/widget_accent"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+        <!-- App logo - clicking opens app -->
+        <!-- 44dp with the icon inset 6dp: the drawable still reads as 32dp,
+             but the target is one a thumb (and TalkBack's double tap) can
+             actually hit. It is the only way out of the widget by its header. -->
+        <ImageView
+            android:id="@+id/widget_logo"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/widget_logo_bg"
+            android:clickable="true"
+            android:focusable="true"
+            android:contentDescription="@string/app_name"
+            android:padding="6dp"
+            android:scaleType="centerInside"
+            android:src="@mipmap/ic_launcher" />
+    </LinearLayout>
+
+    <!-- Empty state -->
+    <TextView
+        android:id="@+id/widget_empty"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:padding="16dp"
+        android:text="No habits yet — open Fyr to add one."
+        android:textColor="@color/widget_muted"
+        android:textSize="13sp"
+        android:visibility="gone" />
+
+    <!-- Habit rows container - responsive with proper text alignment -->
+    <LinearLayout
+        android:id="@+id/habit_rows_container"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:showDividers="middle"
+        android:divider="@color/widget_edge"
+        android:dividerPadding="4dp">
+
+        <LinearLayout
+            android:id="@+id/w1"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:minHeight="44dp"
+            android:orientation="horizontal"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?android:attr/selectableItemBackground">
+
+            <!-- App icon -->
+            <ImageView
+                android:id="@+id/w1_fire"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_gravity="center_vertical"
+                android:scaleType="centerInside"
+                android:src="@mipmap/ic_launcher"
+                android:importantForAccessibility="no" />
+
+            <!-- Habit name - responsive with ellipsis -->
+            <TextView
+                android:id="@+id/w1_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="Drink water"
+                android:textColor="@color/widget_ink"
+                android:textSize="14sp"
+                android:includeFontPadding="false" />
+
+            <!-- Mark (○/✓) - circular background for touch target -->
+            <TextView
+                android:id="@+id/w1_mark"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/widget_mark_bg"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center"
+                android:text="○"
+                android:textColor="@color/widget_muted"
+                android:textSize="16sp"
+                android:includeFontPadding="false" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/w2"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:minHeight="44dp"
+            android:orientation="horizontal"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?android:attr/selectableItemBackground">
+
+            <ImageView
+                android:id="@+id/w2_fire"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_gravity="center_vertical"
+                android:scaleType="centerInside"
+                android:src="@mipmap/ic_launcher"
+                android:importantForAccessibility="no" />
+
+            <TextView
+                android:id="@+id/w2_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="Morning run"
+                android:textColor="@color/widget_ink"
+                android:textSize="14sp"
+                android:includeFontPadding="false" />
+
+            <TextView
+                android:id="@+id/w2_mark"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/widget_mark_bg"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center"
+                android:text="○"
+                android:textColor="@color/widget_muted"
+                android:textSize="16sp"
+                android:includeFontPadding="false" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/w3"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:minHeight="44dp"
+            android:orientation="horizontal"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?android:attr/selectableItemBackground">
+
+            <ImageView
+                android:id="@+id/w3_fire"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_gravity="center_vertical"
+                android:scaleType="centerInside"
+                android:src="@mipmap/ic_launcher"
+                android:importantForAccessibility="no" />
+
+            <TextView
+                android:id="@+id/w3_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="Read 20 pages"
+                android:textColor="@color/widget_ink"
+                android:textSize="14sp"
+                android:includeFontPadding="false" />
+
+            <TextView
+                android:id="@+id/w3_mark"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/widget_mark_bg"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center"
+                android:text="○"
+                android:textColor="@color/widget_muted"
+                android:textSize="16sp"
+                android:includeFontPadding="false" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/w4"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:minHeight="44dp"
+            android:orientation="horizontal"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?android:attr/selectableItemBackground">
+
+            <ImageView
+                android:id="@+id/w4_fire"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_gravity="center_vertical"
+                android:scaleType="centerInside"
+                android:src="@mipmap/ic_launcher"
+                android:importantForAccessibility="no" />
+
+            <TextView
+                android:id="@+id/w4_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="Meditate"
+                android:textColor="@color/widget_ink"
+                android:textSize="14sp"
+                android:includeFontPadding="false" />
+
+            <TextView
+                android:id="@+id/w4_mark"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/widget_mark_bg"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center"
+                android:text="○"
+                android:textColor="@color/widget_muted"
+                android:textSize="16sp"
+                android:includeFontPadding="false" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/w5"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:minHeight="44dp"
+            android:orientation="horizontal"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?android:attr/selectableItemBackground">
+
+            <ImageView
+                android:id="@+id/w5_fire"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_gravity="center_vertical"
+                android:scaleType="centerInside"
+                android:src="@mipmap/ic_launcher"
+                android:importantForAccessibility="no" />
+
+            <TextView
+                android:id="@+id/w5_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="Lights out by 11"
+                android:textColor="@color/widget_ink"
+                android:textSize="14sp"
+                android:includeFontPadding="false" />
+
+            <TextView
+                android:id="@+id/w5_mark"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/widget_mark_bg"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center"
+                android:text="○"
+                android:textColor="@color/widget_muted"
+                android:textSize="16sp"
+                android:includeFontPadding="false" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

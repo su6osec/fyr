@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  The API 26–30 half of the same refusal as data_extraction_rules.xml:
+  pre-Android-12 still reads fullBackupContent, and both mechanisms should
+  agree that nothing here is eligible for anything — cloud restore,
+  device-to-device, or a hand-off during device setup. allowBackup="false"
+  already covers these versions on its own; this file says the same thing in
+  the language that version actually checks, so the intent survives whoever
+  next touches the manifest.
+-->
+<full-backup-content>
+    <exclude domain="sharedpref" path="." />
+    <exclude domain="file" path="." />
+</full-backup-content>

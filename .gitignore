@@ -1,0 +1,13 @@
+# Gradle / Android Studio
+.gradle/
+.kotlin/
+build/
+local.properties
+*.iml
+.idea/
+
+# Signing material must never land in the repo (see signingConfigs in
+# app/build.gradle.kts — the key lives outside the tree by design).
+*.jks
+*.keystore
+*.pepk

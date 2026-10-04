@@ -1,0 +1,12 @@
+<resources>
+    <!--
+      The night half of the widget's palette, restated in full because
+      colours override rather than merge per entry — see values/colors.xml
+      for why the widget carries its own at all.
+    -->
+    <color name="widget_surface">#FF141416</color>
+    <color name="widget_ink">#FFF5F5F7</color>
+    <color name="widget_muted">#FF9A9AA1</color>
+    <color name="widget_accent">#FFE8590C</color>
+    <color name="widget_edge">#FF2A2A2E</color>
+</resources>

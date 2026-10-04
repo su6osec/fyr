@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Android 12+ reads this file instead of (and in addition to) allowBackup,
+  separately for the cloud leg and the device-to-device leg. Fyr excludes
+  everything from both, explicitly, rather than relying on a single
+  allowBackup="false" to keep meaning what it meant on Android 11:
+
+   - cloud-backup: the app's entire document is habit history, kept for
+     someone who was promised no account and no handing-over;
+   - device-transfer: local-ish or not, it happens without the person picking
+     anything, and a transfer restores preferences *without* the avatar files
+     they name — the photograph would arrive already missing.
+
+  The way data leaves Fyr is Settings → Your data → Export, where the person
+  chooses the file and keeps it. Double-negative, in effect: the manifest
+  refuses backup, and this file refuses it again where Android 12 changed the
+  question.
+-->
+<data-extraction-rules>
+    <cloud-backup>
+        <exclude domain="sharedpref" path="." />
+        <exclude domain="file" path="." />
+    </cloud-backup>
+    <device-transfer>
+        <exclude domain="sharedpref" path="." />
+        <exclude domain="file" path="." />
+    </device-transfer>
+</data-extraction-rules>

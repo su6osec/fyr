@@ -1,0 +1,18 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!--
+      The night counterpart of values/themes.xml. Style resources do not merge
+      across qualifiers, so the whole style is restated here rather than
+      overridden attribute by attribute — see that file for why the frame
+      exists at all.
+    -->
+    <style name="Theme.Fyr" parent="android:Theme.Material.NoActionBar">
+        <item name="android:windowBackground">@color/window_background_dark</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:enforceNavigationBarContrast" tools:targetApi="q">false</item>
+        <item name="android:enforceStatusBarContrast" tools:targetApi="q">false</item>
+    </style>
+
+</resources>

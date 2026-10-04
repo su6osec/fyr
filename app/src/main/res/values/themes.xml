@@ -1,0 +1,23 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!--
+      Only two themes exist in Fyr: light and dark, and which one is never a
+      stored preference — the system decides.
+
+      This style is only the cold-start window, the frame you see before
+      Compose has drawn anything. It is set per configuration (this file for
+      day, values-night for night) so that first frame matches the rest of the
+      app instead of flashing black on a light phone. MainActivity sets the
+      bar icon contrast from the same uiMode flag, and Compose reads it again
+      for everything after that.
+    -->
+    <style name="Theme.Fyr" parent="android:Theme.Material.NoActionBar">
+        <item name="android:windowBackground">@color/window_background_light</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:enforceNavigationBarContrast" tools:targetApi="q">false</item>
+        <item name="android:enforceStatusBarContrast" tools:targetApi="q">false</item>
+    </style>
+
+</resources>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  The widget's contract with the launcher.
+
+  Defines multiple sizes so users can pick the one that fits their home screen.
+  Each size has fixed dimensions for consistent appearance.
+-->
+<appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
+    android:initialLayout="@layout/fyr_widget"
+    android:minHeight="110dp"
+    android:minWidth="140dp"
+    android:resizeMode="horizontal|vertical"
+    android:updatePeriodMillis="1800000"
+    android:widgetCategory="home_screen"
+    android:targetCellWidth="2"
+    android:targetCellHeight="2"
+    android:minResizeWidth="140dp"
+    android:minResizeHeight="110dp"
+    android:maxResizeWidth="560dp"
+    android:maxResizeHeight="440dp" />

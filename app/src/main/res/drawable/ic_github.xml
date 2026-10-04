@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  GitHub mark, 24x24, single compound path. Fill is black because the icon is
+  never shown raw: DeveloperLink tints it with the scheme's primary, so the
+  mark carries the ember accent like every other accent in Fyr instead of
+  arriving in its own brand colour.
+-->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    <path
+        android:fillColor="#FF000000"
+        android:pathData="M12,0.3c-6.6,0 -12,5.4 -12,12c0,5.3 3.4,9.8 8.2,11.4c0.6,0.1 0.8,-0.3 0.8,-0.6c0,-0.3 -0,-1 -0,-2c-3.3,0.7 -4,-1.6 -4,-1.6C4.4,18.1 3.6,17.7 3.6,17.7c-1.1,-0.7 0.1,-0.7 0.1,-0.7c1.2,0.1 1.8,1.2 1.8,1.2c1.1,1.8 2.8,1.3 3.5,1c0.1,-0.8 0.4,-1.3 0.8,-1.6c-2.7,-0.3 -5.5,-1.3 -5.5,-5.9c0,-1.3 0.5,-2.4 1.2,-3.2c-0.1,-0.3 -0.5,-1.5 0.1,-3.2c0,0 1,-0.3 3.3,1.2c1,-0.3 2,-0.4 3,-0.4c1,0 2,0.1 3,0.4c2.3,-1.6 3.3,-1.2 3.3,-1.2c0.6,1.7 0.2,2.9 0.1,3.2c0.8,0.8 1.2,1.9 1.2,3.2c0,4.6 -2.8,5.6 -5.5,5.9c0.4,0.4 0.8,1.1 0.8,2.2c0,1.6 -0,2.9 -0,3.3c0,0.3 0.2,0.7 0.8,0.6C20.6,22.1 24,17.6 24,12.3C24,5.7 18.6,0.3 12,0.3" />
+</vector>

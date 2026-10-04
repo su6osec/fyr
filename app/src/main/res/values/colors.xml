@@ -1,0 +1,31 @@
+<resources>
+    <!-- Launcher: black field, glassy flame foreground. -->
+    <color name="ic_launcher_background">#000000</color>
+
+    <!-- Splash / window base so there is never a white flash before Compose draws. -->
+    <color name="window_background_dark">#0A0A0B</color>
+    <color name="window_background_light">#FAFAFB</color>
+
+    <!--
+      Home-screen widget.
+
+      Its own palette rather than the Compose theme's, for one reason: a
+      widget is drawn by the launcher over somebody else's wallpaper, so it
+      needs an opaque plate of its own instead of a surface that assumes it
+      already has a background. The day values live here and are restated
+      whole in values-night — colours do merge across qualifiers, so the
+      widget follows the same system dark flag the app does.
+    -->
+    <color name="widget_surface">#FFFFFFFF</color>
+    <color name="widget_ink">#FF131316</color>
+    <color name="widget_muted">#FF6A6A73</color>
+    <!--
+      EmberDim on the white plate rather than Ember. The count sits at 12sp
+      bold on a white background, where Ember is 3.58:1 — the accent doing a
+      text job it is too light for. EmberDim is the same hue at 5.82:1, and
+      the ✓ mark takes it just as well as the number does. values-night
+      restates the brighter Ember, where it is the light end of the pair.
+    -->
+    <color name="widget_accent">#FFB23F06</color>
+    <color name="widget_edge">#FFE6E6EA</color>
+</resources>

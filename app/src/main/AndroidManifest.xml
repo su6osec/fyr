@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--
+      VIBRATE is the tab tick and the haptic feedback — zero privacy cost.
+
+      INTERNET is the single exception to Fyr's local-only posture, and it is
+      spent on exactly one thing: a GET of a public version document at app
+      launch, so a sideloaded build can be told a newer one exists (there is
+      no store to do it for it). No identifiers in the request, a version
+      number in the reply, and the host is pinned in UpdateChecker rather
+      than configured anywhere.
+
+      It is still an exception, so the build checks it rather than trusting
+      it: verifyPermissionManifest in app/build.gradle.kts reads the *merged*
+      manifest — where library declarations land — and fails if the permission
+      set ever drifts from this pair by so much as one entry. A dependency
+      quietly adding a permission is exactly how a local-only app stops being
+      one, and this is the line where that stops being possible to forget.
+    -->
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:name=".FyrApp"
+        android:allowBackup="false"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Fyr"
+        android:enableOnBackInvokedCallback="true">
+        <!--
+          Auto Backup was uploading this app's entire document — name,
+          habits, every tick, the trash — to Google's servers by default,
+          which is not what "no account" means, and it copied
+          preferences *without* the avatar files they name, so a restore
+          arrived with a photo that no longer existed. The refusal is stated
+          three times, once per mechanism Android has used: allowBackup
+          as the master switch, fullBackupContent for the cloud restore
+          that 26–30 check, and data_extraction_rules.xml for the cloud
+          and device-transfer legs Android 12 split apart. The sanctioned
+          way data leaves Fyr is the one the person chooses:
+          Settings → Your data → Export.
+        -->
+
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:launchMode="singleTop"
+            android:theme="@style/Theme.Fyr"
+            android:windowSoftInputMode="adjustResize">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!--
+          Exported: a launcher must be able to ask for an update, and it is
+          the only component here that has to be. It renders and nothing else.
+          The press-a-row action lives in FyrWidgetActions below, which is not
+          exported — see that class for why that split exists.
+        -->
+        <receiver
+            android:name=".widget.FyrWidgetProvider"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="android.intent.action.DATE_CHANGED" />
+                <action android:name="android.intent.action.TIME_SET" />
+                <action android:name="android.intent.action.TIMEZONE_CHANGED" />
+                <action android:name="android.intent.action.CONFIGURATION_CHANGED" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/fyr_widget_info" />
+        </receiver>
+
+        <receiver
+            android:name=".widget.FyrWidgetActions"
+            android:enabled="true"
+            android:exported="false" />
+    </application>
+
+</manifest>

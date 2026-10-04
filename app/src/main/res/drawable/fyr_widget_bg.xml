@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  The widget's plate: one opaque rounded card, no more.
+
+  Opaque because the launcher draws this over a wallpaper Fyr has never seen
+  and cannot match; a translucent card that reads as glass over a dark home
+  screen reads as mud over a bright one. The colour it fills with comes from
+  @color/widget_surface, which is restated in values-night — so the card
+  follows the same system dark flag the app does rather than picking its own.
+-->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="@color/widget_surface" />
+    <corners android:radius="22dp" />
+    <stroke
+        android:width="1dp"
+        android:color="@color/widget_edge" />
+</shape>
