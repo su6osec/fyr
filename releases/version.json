@@ -1,6 +1,6 @@
 {
-  "versionCode": 2,
-  "versionName": "1.1",
+  "versionCode": 1,
+  "versionName": "1.0",
   "url": "https://github.com/su6osec/fyr/releases/latest",
-  "notes": "Temporary — used to prove the live update gate."
+  "notes": "First public release — habits, streaks, freezes, trophies and a backup you own."
 }
