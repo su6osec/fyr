@@ -1,6 +1,6 @@
 {
-  "versionCode": 1,
-  "versionName": "1.0",
+  "versionCode": 2,
+  "versionName": "1.1",
   "url": "https://github.com/su6osec/fyr/releases/latest",
-  "notes": "First public release — habits, streaks, freezes, trophies and a backup you own."
+  "notes": "Test update for Deepanshu — streaks now survive a restored backup. Fixed calendar drifting on some phones."
 }
